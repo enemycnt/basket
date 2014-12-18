@@ -1,5 +1,5 @@
 require 'csv'
-require "basket/version"
+require_relative 'basket/version'
 
 module Basket
   # Your code goes here...
@@ -9,6 +9,7 @@ module Basket
     EXEMPT_LIST = %w(book chocolate pill)
 
     def initialize(path)
+
       # path = '/Users/nick/Projects/basket/data/input1.csv'
       arr = CSV.read path, :headers => true, :header_converters => :symbol, :col_sep => ", ", :converters => :all
       @items = []
@@ -31,11 +32,24 @@ module Basket
     end
 
     def sales_taxes
-      @items.inject(0){ |sum, a| sum + a.tax }
+      @items.inject(0){ |sum, a| sum + a.tax }.round(2)
     end
 
     def price_sum
       @items.inject(0){ |sum, a| sum + a.price_gross }
+    end
+
+    def export_to_csv
+      CSV.open("data/export.csv", "wb") do |csv|
+        @items.each do |item|
+          csv << [item.amount, item.name, item.price_gross]
+        end
+        # Empty row
+        csv << [" ", " "]
+        # Total and sales taxes
+        csv << ["Sales Taxes:", sales_taxes]
+        csv << ["Total:", price_sum]
+      end
     end
   end
 
