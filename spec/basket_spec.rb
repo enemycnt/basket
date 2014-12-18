@@ -8,19 +8,19 @@ describe Basket::Basket do
 
   describe "#new" do
     it "takes path parametr and returns a Basket object" do
-      @basket.should be_an_instance_of Basket::Basket
+      expect(@basket).to be_an_instance_of Basket::Basket
     end
   end
 
   describe "#sales_taxes" do
     it "returns sum of taxes" do
-      @basket.sales_taxes.should eq(1.5)
+      expect(@basket.sales_taxes).to eq(1.5)
     end
   end
 
   describe "#price_sum" do
     it "returns sum of gross prices" do
-      @basket.price_sum.should eq(29.83)
+      expect(@basket.price_sum).to eq(29.83)
     end
   end
 
@@ -33,19 +33,19 @@ describe Basket::Item do
 
   describe "#new" do
     it "takes three parameters and returns an Item object" do
-      @item.should be_an_instance_of Basket::Item
+      expect(@item).to be_an_instance_of Basket::Item
     end
   end
 
   describe "#tax" do
     it "returns correct tax" do
-      @item.tax.should eq(1.5)
+      expect(@item.tax).to eq(1.5)
     end
   end
 
   describe "#price" do
     it "returns price with taxes" do
-      @item.price_gross.should eq(16.49)
+      expect(@item.price_gross).to eq(16.49)
     end
   end
 
@@ -58,31 +58,31 @@ describe Basket::ExemptItem do
 
   describe "#new" do
     it "takes three parameters and returns an ExemptItem object" do
-      @item.should be_an_instance_of Basket::ExemptItem
+      expect(@item).to be_an_instance_of Basket::ExemptItem
     end
   end
 
   describe "#tax" do
     it "returns correct tax" do
-      @item.tax.should eq(0.0)
+      expect(@item.tax).to eq(0.0)
     end
   end
 
   describe "#price" do
     it "returns price with taxes" do
-      @item.price_gross.should eq(14.99)
+      expect(@item.price_gross).to eq(14.99)
     end
   end
 
   describe "#imported?" do
-    it "returns true or false depends of imported" do
-      @item.imported?.should be false
+    it "returns true or false depends of imported status" do
+      expect(@item.imported?).to be false
     end
   end
 
   describe "import_tax" do
     it "returns imported tax" do
-      @item.import_tax.should eq(0.0)
+      expect(@item.import_tax).to eq(0.0)
     end
   end
 end
