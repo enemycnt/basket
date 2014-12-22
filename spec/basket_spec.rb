@@ -3,7 +3,7 @@ require_relative '../lib/basket'
 
 describe Basket::Basket do
   before :each do
-    @basket = Basket::Basket.new '/Users/nick/Projects/basket/data/input1.csv'
+    @basket = Basket::Basket.new 'data/input1.csv'
   end
 
   describe "#new" do
