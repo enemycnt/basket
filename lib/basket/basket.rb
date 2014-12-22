@@ -5,7 +5,7 @@ module Basket
   #The main class basket that contains other items
   class Basket
     attr_accessor :items
-
+    NAME_POSTFIX = "_exported.csv"
     def initialize(path)
       @path = path
       csv_rows = CSV.read @path,
@@ -20,15 +20,15 @@ module Basket
     end
 
     def sales_taxes
-      @items.inject(0){ |sum, a| sum + a.tax }.round(2)
+      @items.inject(0){ |sum, item| sum + item.tax }.round(2)
     end
 
     def price_sum
-      @items.inject(0){ |sum, a| sum + a.price_gross }.round(2)
+      @items.inject(0){ |sum, item| sum + item.price_gross }.round(2)
     end
 
     def export_to_csv
-      export_path = @path.gsub(".csv", "_exported.csv")
+      export_path = @path.gsub(".csv", NAME_POSTFIX)
       CSV.open(export_path, "wb") do |csv|
         @items.each do |item|
           csv << [item.amount, item.name, item.price_gross]

@@ -24,6 +24,14 @@ describe Basket::Basket do
     end
   end
 
+  describe "#export_to_csv" do
+    it "creates csv file" do
+      @basket.export_to_csv
+      expect(File).to exist('data/input1_exported.csv')
+    end
+
+  end
+
 end
 
 
