@@ -1,4 +1,4 @@
-# Basket
+# Basket [![Build Status](https://travis-ci.org/enemycnt/basket.svg?branch=master)](https://travis-ci.org/enemycnt/basket) [![Code Climate](https://codeclimate.com/github/enemycnt/basket/badges/gpa.svg)](https://codeclimate.com/github/enemycnt/basket) [![Test Coverage](https://codeclimate.com/github/enemycnt/basket/badges/coverage.svg)](https://codeclimate.com/github/enemycnt/basket)
 
 Simple CLI basket application with taxes.
 
