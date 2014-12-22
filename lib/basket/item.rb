@@ -17,8 +17,8 @@ module Basket
     end
 
     def self.is_exemp?(product_name)
-      product_name.split(' ').detect do |word|
-        EXEMPT_LIST.any?{|exemp| word.match(exemp)}
+      EXEMPT_LIST.find do |root|
+        product_name.include?(root)
       end
     end
 
