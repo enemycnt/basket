@@ -1,5 +1,6 @@
 require_relative 'item'
 require_relative 'exempt_item'
+require_relative 'item_collection'
 
 module Basket
   #The main class basket that contains other items
@@ -7,13 +8,14 @@ module Basket
     attr_accessor :items
     NAME_POSTFIX = "_exported.csv"
     def initialize(path)
-      @path = path
-      csv_rows = CSV.read @path,
+      # @path = path
+      csv_rows = CSV.read path,
                           :headers => true,
                           :header_converters => :symbol,
                           :col_sep => ", ",
                           :converters => :all
-      @items = []
+      # @items = []
+      @items = ItemCollection.new(path, self)
       csv_rows.each do |row|
         @items.push Item.for(row[:quantity], row[:product], row[:price])
       end
@@ -28,17 +30,7 @@ module Basket
     end
 
     def export_to_csv
-      export_path = @path.gsub(".csv", NAME_POSTFIX)
-      CSV.open(export_path, "wb") do |csv|
-        @items.each do |item|
-          csv << [item.amount, item.name, item.price_gross]
-        end
-        # Empty row
-        csv << [" ", " "]
-        # Total and sales taxes
-        csv << ["Sales Taxes:", sales_taxes]
-        csv << ["Total:", price_sum]
-      end
+      @items.export_to_csv
     end
   end
 end
