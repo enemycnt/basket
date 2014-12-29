@@ -6,19 +6,15 @@ module Basket
   #The main class basket that contains other items
   class Basket
     attr_accessor :items
-    NAME_POSTFIX = "_exported.csv"
+    # NAME_POSTFIX = "_exported.csv"
     def initialize(path)
-      # @path = path
       csv_rows = CSV.read path,
                           :headers => true,
                           :header_converters => :symbol,
                           :col_sep => ", ",
                           :converters => :all
-      # @items = []
       @items = ItemCollection.new(path, self)
-      csv_rows.each do |row|
-        @items.push Item.for(row[:quantity], row[:product], row[:price])
-      end
+      csv_rows.each { |row| @items.add_item row }
     end
 
     def sales_taxes
@@ -30,7 +26,20 @@ module Basket
     end
 
     def export_to_csv
-      @items.export_to_csv
+      CSV.open(@items.export_path, "wb") do |csv|
+        @items.export_items csv
+        add_footer csv
+      end
     end
+
+    def add_footer(csv )
+      # Empty row
+      csv << [" ", " "]
+      # Total and sales taxes
+      csv << ["Sales Taxes:", sales_taxes]
+      csv << ["Total:", price_sum]
+    end
+
+
   end
 end
