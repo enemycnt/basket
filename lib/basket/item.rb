@@ -1,6 +1,7 @@
 module Basket
   # Standard item
   class Item
+
     attr_accessor :amount, :name, :price, :price_gross, :tax
 
     EXEMPT_LIST = %w(book chocolate pill)
@@ -44,5 +45,4 @@ module Basket
       @name.include?("imported ")
     end
   end
-
 end

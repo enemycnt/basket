@@ -19,6 +19,5 @@ module Basket
     def export_items(csv)
       self.each { |item| csv << [item.amount, item.name, item.price_gross] }
     end
-
   end
 end
