@@ -3,17 +3,18 @@ require_relative 'exempt_item'
 require_relative 'item_collection'
 
 module Basket
-  #The main class basket that contains other items
+  # The main class basket that contains other items
   class Basket
+
     attr_accessor :items
-    # NAME_POSTFIX = "_exported.csv"
+
     def initialize(path)
       csv_rows = CSV.read path,
                           :headers => true,
                           :header_converters => :symbol,
                           :col_sep => ", ",
                           :converters => :all
-      @items = ItemCollection.new(path, self)
+      @items = ItemCollection.new(path)
       csv_rows.each { |row| @items.add_item row }
     end
 
@@ -32,7 +33,7 @@ module Basket
       end
     end
 
-    def add_footer(csv )
+    def add_footer(csv)
       # Empty row
       csv << [" ", " "]
       # Total and sales taxes
