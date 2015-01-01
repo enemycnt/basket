@@ -7,7 +7,7 @@ Additionally it save results to CSV file.
 
 ## Installation
 Developed and tested on OSX 10.10.1, but should work on linux as well.
-Before we start please ensure that you have [rvm](https://rvm.io/rvm/install) and [ruby 2.1.3](https://rvm.io/rubies/installing) installed on your developer workstation.
+Before we start please ensure that you have [rvm](https://rvm.io/rvm/install) and [ruby 2.1.5](https://rvm.io/rubies/installing) installed on your developer workstation.
 
 Pull source from github:
 
