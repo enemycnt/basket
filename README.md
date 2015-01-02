@@ -11,7 +11,7 @@ Before we start please ensure that you have [rvm](https://rvm.io/rvm/install) an
 
 Pull source from github:
 
-    $ git pull git@github.com:enemycnt/basket.git
+    $ git clone git@github.com:enemycnt/basket.git
 
 Then cd to `basket` dir and install dependencies with bundler:
 
